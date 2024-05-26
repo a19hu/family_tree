@@ -34,7 +34,6 @@ const students = [
     { roll_no: '1', name: 'John Doe', parentId: null },
     { roll_no: '2', name: 'Jane Doe', parentId: '1' },
     { roll_no: '3', name: 'Jim Doe', parentId: '1' },
-    // Add more student records as needed
 ];
 
 

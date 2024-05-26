@@ -6,6 +6,7 @@ const { schema, root } = require('./schema/schema');
 const ConnectDB = require('./config/db');
 const port = process.env.PORT || 4000;
 const cors = require('cors');
+const router = require('./insertdata/insertdata');
 
 const app = express();
 ConnectDB();
@@ -14,6 +15,8 @@ ConnectDB();
 
 
 app.use(cors());
+app.use(express.json());
+app.use('/data',router)
 app.use('/graphql', graphqlHTTP({
     schema: schema,
     rootValue: root,
