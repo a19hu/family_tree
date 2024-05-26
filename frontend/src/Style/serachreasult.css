@@ -1,0 +1,21 @@
+.topmargin{
+    padding-top: 6%;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+}
+.text{
+    display: grid;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+}
+.treediv{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* overflow-x: scroll; */
+    min-width: 100%;
+}
