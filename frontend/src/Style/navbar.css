@@ -1,18 +1,42 @@
+.header {
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  width: 100%;
+  /* height: 100px; */
+background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 10px 8px 32px 0 rgba(0, 0, 0, 0.37);
+  justify-content: space-between;
+}
+.header_search{
+  position: fixed;
+    z-index: 1000;
+    display: flex;
+    width: 100%;
+    /* height: 100px; */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 10px 8px 32px 0 rgba(0, 0, 0, 0.37);
+    padding: 10px 0 ;
+    align-items: center;
+    gap: 30px;
+    justify-content: center;
 
+}
 .logo{
     position: relative;
     left: 3%;
     margin: 1px 10px;
-   
+    display: flex;
+  align-items: center;
 }
-.bounce_img {
-  display: flex;
-}
+
 .logo img{
    width: 50px;
    height: 50px;
-   /* filter: drop-shadow(2px); */
-   /* filter: contrast(200%); */
    filter: drop-shadow(16px 16px 20px rgb(255, 4, 4));
 }
 .logotexts p{
@@ -25,57 +49,15 @@
   padding-left: 13px ;
   padding-top: 4px;
 }
-.header{
-    position: fixed;
-    z-index: 1000;
-    display: flex;
-    width: 100%;
-    
-}
-.glass{
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 10px 8px 32px 0 rgba(0, 0, 0, 0.37);
-    z-index: 100px;
-    position: absolute;
-    width: 100%;
-  
-    
-  }
-  @keyframes bounce-animation {
-    16.65% {
-      transform: translateY(8px);
-    }
-    33.3% {
-      -webkit-transform: translateY(-6px);
-      transform: translateY(-6px);
-    }
-  
-    49.95% {
-      -webkit-transform: translateY(4px);
-      transform: translateY(4px);
-    }
-  
-    66.6% {
-      -webkit-transform: translateY(-2px);
-      transform: translateY(-2px);
-    }
-  
-    83.25% {
-      -webkit-transform: translateY(1px);
-      transform: translateY(1px);
-    }
-   
-    100% {
-      transform: translateY(0);
-    }
-  }
 
-  .bounce_img img {
-    animation-name: bounce-animation;
-    animation-duration: 10s;
-  }
+ .app_link{
+  display: flex;
+  justify-content:space-around;
+  align-items: center;
+  gap: 40px;
+  margin-right: 30px;
+ }
+
   
   @media screen and (max-width: 600px) {
     .logotexts {
@@ -84,17 +66,17 @@
   }
 
   
-  .treeD{
+  /* .treeD{
     position: absolute;
     right: 15%;
-  }
+  } */
   .treeD a {
     display: inline-block;
     position: relative;
-    color: #0087ca;
+    color: #f3f3f3;
     text-decoration: none;
-   font-size: 2rem;
-   font-weight: 900;
+   font-size: 1.2rem;
+   font-weight: 400;
   }
   
   .treeD a::after {
@@ -105,7 +87,7 @@
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: #0087ca;
+    background-color: #0a567d;
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
   }
@@ -114,4 +96,28 @@
     transform: scaleX(1);
     transform-origin: bottom left;
   }
+  .search{
+    cursor: pointer;
+  }
+    .searchButton {
+      color: rgb(255, 255, 255);
+      background: none;
+      padding: 9px;
+      cursor: pointer;
+    }
   
+  
+    .searchInput {
+      /* border: none; */
+      background: none;
+      outline: none;
+      color: rgb(255, 255, 255);
+      font-size: 15px;
+      padding: 8px 10px;
+      /* width: 80%; */
+    }
+  
+    .searchInput::placeholder {
+      color: rgb(246, 246, 246);
+    }
+    

@@ -1,16 +1,11 @@
-/* Popup.css */
 .modalresult {
     position: fixed;
-    top: 140%;
+    top: 80px;
+    z-index: 1000;
     left: 0;
     width: 100%;
-    /* height: 100%; */
-    /* backdrop-filter: blur(3px); */
     display: flex;
-    justify-content: center;
-    align-items: center;
-    /* transform: translateX(-50%); */
-  /* transition: top 0.5s ease-in-out; */
+      justify-content: center;
   }
  .visible {
     animation: movedown 1s forwards;
@@ -39,30 +34,30 @@
     }
   }
   .modal-contenthelpsu {
-    background-color: rgba(0, 0, 0, 0.898);
+    background-color: rgba(0, 0, 0, 0.629);
     padding: 20px;
-    width: 400px;
+    /* margin: 0  10%; */
+    width: 80%;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(20, 20, 20, 0.3);
-    
+    display: flex;
+      justify-content: center;
+      align-items: center;
   }
   
-  .closes {
-    position: relative;
-    top: 0px;
-    right:0px !important;
-    cursor: pointer;
-  }
-  .searchtext a{
+
+
+  .searchtext {
    color: aliceblue;
    text-decoration: none;
    justify-content: center;
     align-items: center;
-    display: flex;
     font-size: 1.3rem;
+    text-transform: capitalize;
   }
-  .searchtext a:hover{
+  .searchtext:hover{
+    cursor: pointer;
     text-decoration: underline;
+
   }
-  
   

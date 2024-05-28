@@ -5,6 +5,9 @@ type Student {
     roll_no: String
     name: String
     parentId: String
+    year: Int
+    linkedIn: String
+    picture: String
 }
 
 
@@ -62,10 +65,16 @@ const root = {
     },
     student_search: async ({ search_query }) => {
         try{
+            // const students = await Student.find({
+            //     $or: [
+            //         { roll_no: search_query },
+            //         { name: search_query }
+            //     ]
+            // });
             const students = await Student.find({
                 $or: [
-                    { roll_no: search_query },
-                    { name: search_query }
+                    { roll_no: { $regex: search_query, $options: 'i' } },  // case-insensitive partial match
+                    { name: { $regex: search_query, $options: 'i' } }     // case-insensitive partial match
                 ]
             });
             return students;
