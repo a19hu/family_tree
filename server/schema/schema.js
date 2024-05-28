@@ -37,34 +37,35 @@ const root = {
         }
     },
     parent: async ({ roll_number }) => {
-        try{
+        try {
             const student = await Student.findOne({ roll_no: roll_number });
             const parent = await Student.findOne({ roll_no: student.parentId });
-            return parent;  
-            
-        }catch(err){
+            return parent;
+
+        } catch (err) {
             throw new Error("Error retrieving user");
         }
     },
     children: async ({ roll_number }) => {
-        try{
-         const children= await Student.find({ parentId: roll_number });
-         return children;
-        }catch(err){
+        try {
+            const children = await Student.find({ parentId: roll_number });
+            return children;
+        } catch (err) {
             throw new Error("Error retrieving user");
         }
     },
     sibling: async ({ roll_number }) => {
-        try{
-            const student= await Student.findOne({ roll_no: roll_number });
-            const sibling = await Student.find({ parentId: student.parentId });
-         return sibling ;
-        }catch(err){
+        try {
+            const student = await Student.findOne({ roll_no: roll_number });
+            const sibling = await Student.find({ parentId: student.parentId, roll_no: { $ne: roll_number } });
+
+            return sibling;
+        } catch (err) {
             throw new Error("Error retrieving user");
         }
     },
     student_search: async ({ search_query }) => {
-        try{
+        try {
             // const students = await Student.find({
             //     $or: [
             //         { roll_no: search_query },
@@ -73,19 +74,19 @@ const root = {
             // });
             const students = await Student.find({
                 $or: [
-                    { roll_no: { $regex: search_query, $options: 'i' } },  // case-insensitive partial match
-                    { name: { $regex: search_query, $options: 'i' } }     // case-insensitive partial match
+                    { roll_no: { $regex: search_query, $options: 'i' } }, 
+                    { name: { $regex: search_query, $options: 'i' } }   
                 ]
             });
             return students;
 
-        }catch(err){
+        } catch (err) {
             throw new Error("Error retrieving user");
         }
     },
-     
-    
-  
+
+
+
 };
 
 

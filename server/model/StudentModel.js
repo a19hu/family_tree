@@ -22,7 +22,9 @@ const studentSchema = new mongoose.Schema({
 
     },
     picture: {
-        type: String,
+        // data: Buffer,
+        // contentType: String
+        type: String
     },
 });
 

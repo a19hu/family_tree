@@ -7,6 +7,19 @@ const ConnectDB = require('./config/db');
 const port = process.env.PORT || 4000;
 const cors = require('cors');
 const router = require('./router/router');
+const multer = require('multer');
+const path = require('path');
+const csvtojson = require('csvtojson')
+const Student = require('./model/StudentModel');
+var excelStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './data');     
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname);
+    }
+});
+var excelUploads = multer({ storage: excelStorage });
 
 const app = express();
 ConnectDB();
@@ -21,6 +34,8 @@ app.use(cors(
         credentials: true
     }
 ));
+app.use(express.static('public'))
+app.set('view engine', 'ejs')
 app.use(express.json());
 app.use('/api',router)
 app.use('/graphql', graphqlHTTP({
@@ -28,6 +43,42 @@ app.use('/graphql', graphqlHTTP({
     rootValue: root,
     graphiql: true, 
 }));
+
+app.get('/data', (req, res) => {
+    res.render('index.ejs');
+
+});
+app.post('/uploadExcelFile', excelUploads.single("uploadfile"), (req, res) => {
+    importFile('./data/'+req.file.filename);
+    function importFile(filePath){
+        var arrayToInsert = [];
+        csvtojson().fromFile(filePath).then(source => {
+            for (var i = 0; i < source.length; i++) {
+                var singleRow = {
+                    roll_no: source[i]["roll_no"],
+                    name: source[i]["name"],
+                    year: source[i]["year"],
+                    linkedIn: source[i]["linkedIn"],
+                    parentId: source[i]["parentId"],
+                    picture: source[i]["picture"],
+
+                };
+                arrayToInsert.push(singleRow);
+            }
+            console.log(arrayToInsert)
+            const result = Student.create(arrayToInsert);
+            res.status(200).json({
+                message: 'Student inserted successfully',
+                insertedStudent: result
+            });
+        });
+    }
+})
+
+app.get('/', (req, res) => {
+    app.use(express.static(path.join(__dirname, 'frontend','build')));
+    res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
+})
 
 app.listen(port, () => {
     console.log('Running a GraphQL API server at http://localhost:4000/graphql');
