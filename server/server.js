@@ -1,10 +1,10 @@
 // https://github.com/bradtraversy/project-mgmt-graphql/blob/main/.env.example
 const express = require('express');
 require('dotenv').config();
-const { graphqlHTTP } = require('express-graphql');
+var { createHandler } = require("graphql-http/lib/use/express")
 const { schema, root } = require('./schema/schema');
 const ConnectDB = require('./config/db');
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 5000;
 const cors = require('cors');
 const router = require('./router/router');
 const multer = require('multer');
@@ -38,7 +38,7 @@ app.use(express.static('public'))
 app.set('view engine', 'ejs')
 app.use(express.json());
 app.use('/api',router)
-app.use('/graphql', graphqlHTTP({
+app.use('/graphql', createHandler({
     schema: schema,
     rootValue: root,
     graphiql: true, 
@@ -81,5 +81,5 @@ app.get('/', (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log('Running a GraphQL API server at http://localhost:4000/graphql');
+    console.log('Running a GraphQL API server at http://localhost:5000/graphql');
 });
