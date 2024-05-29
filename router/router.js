@@ -10,11 +10,11 @@ router.get('/alltree', async (req, res) => {
         const rootNodes=[];
          console.log(students)
         students.forEach(student => {
-            studentDict[student.roll_no] = { name: student, roll_no: student.roll_no,picture:student.picture, children: [] };
+            studentDict[student.roll_no.toUpperCase()] = { name: student, roll_no: student.roll_no.toUpperCase(),picture:student.picture, children: [] };
         })
         Object.values(studentDict).forEach(studentData => {
             if (studentData.name.parentId) {
-                const parentId = studentData.name.parentId;
+                const parentId = studentData.name.parentId.toUpperCase();
                 if (studentDict[parentId]) {
                     studentDict[parentId].children.push(studentData);
                 } else {
