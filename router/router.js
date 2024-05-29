@@ -30,6 +30,7 @@ router.get('/alltree', async (req, res) => {
                 rollNo: node.name.roll_no,
                 name: node.name.name,
                 parentId: node.name.parentId,
+                picture: node.name.picture,
                 children: node.children.map(buildTree)
             };
             return serializedNode;
