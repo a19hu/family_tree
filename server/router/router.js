@@ -15,8 +15,13 @@ router.get('/alltree', async (req, res) => {
         Object.values(studentDict).forEach(studentData => {
             if (studentData.name.parentId) {
                 const parentId = studentData.name.parentId;
-                studentDict[parentId].children.push(studentData);
+                if (studentDict[parentId]) {
+                    studentDict[parentId].children.push(studentData);
+                } else {
+                    console.error(`Parent with ID ${parentId} not found for student with ID ${studentData.roll_no}`);
+                }
             } else {
+            
                 rootNodes.push(studentData);
             }
         });
@@ -30,7 +35,7 @@ router.get('/alltree', async (req, res) => {
             return serializedNode;
         };
         const treeData = rootNodes.map(buildTree);
-
+         console.log(treeData)
         res.status(200).json(treeData);
     } catch (err) {
         res.status(500).json({
