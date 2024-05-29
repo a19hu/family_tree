@@ -8,7 +8,7 @@ router.get('/alltree', async (req, res) => {
         const students = await Student.find();
         const studentDict={};
         const rootNodes=[];
-
+         console.log(students)
         students.forEach(student => {
             studentDict[student.roll_no] = { name: student, roll_no: student.roll_no,picture:student.picture, children: [] };
         })
@@ -19,6 +19,7 @@ router.get('/alltree', async (req, res) => {
                     studentDict[parentId].children.push(studentData);
                 } else {
                     console.error(`Parent with ID ${parentId} not found for student with ID ${studentData.roll_no}`);
+                    rootNodes.push(studentData);
                 }
             } else {
             
