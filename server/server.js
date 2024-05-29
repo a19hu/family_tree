@@ -70,9 +70,17 @@ app.post('/uploadExcelFile', excelUploads.single("uploadfile"), (req, res) => {
             res.status(200).json({
                 message: 'Student inserted successfully',
                 insertedStudent: result
+                
+            });
+
+        }).catch(err => {
+            res.status(500).json({
+                error: err.message
             });
         });
     }
+    
+    res.redirect('/')
 })
 
 app.get('/', (req, res) => {
