@@ -14,12 +14,11 @@ console.log(roll)
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/alltree/`);
+        const response = await axios.get(`${window.location.origin}/api/alltree/`);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
         setError(error);
-        console.error('eer',error);
         setIsLoading(false);
       }
     };
