@@ -4,7 +4,7 @@ require('dotenv').config();
 var { createHandler } = require("graphql-http/lib/use/express")
 const { schema, root } = require('./schema/schema');
 const ConnectDB = require('./config/db');
-const port = process.env.PORT || 2000;
+const port = process.env.PORT || 8000;
 const cors = require('cors');
 const router = require('./router/router');
 const multer = require('multer');
@@ -89,5 +89,5 @@ app.post('/uploadExcelFile', excelUploads.single("uploadfile"), (req, res) => {
 // })
 
 app.listen(port, () => {
-    console.log('Running a GraphQL API server at http://localhost:2000/graphql');
+    console.log('Running a GraphQL API server at http://localhost:8000/graphql');
 });
