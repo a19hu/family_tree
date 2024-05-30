@@ -48,40 +48,37 @@ app.get('/data', (req, res) => {
     res.render('index.ejs');
 
 });
+
 app.post('/uploadExcelFile', excelUploads.single("uploadfile"), (req, res) => {
-    importFile('./data/'+req.file.filename);
-    function importFile(filePath){
-        var arrayToInsert = [];
-        csvtojson().fromFile(filePath).then(source => {
-            for (var i = 0; i < source.length; i++) {
-                var singleRow = {
-                    roll_no: source[i]["roll_no"].toUpperCase(),
-                    name: source[i]["name"],
-                    year: source[i]["year"],
-                    linkedIn: source[i]["linkedIn"],
-                    parentId: source[i]["parentId"].toUpperCase(),
-                    picture: source[i]["picture"],
-
-                };
-                arrayToInsert.push(singleRow);
-            }
-            console.log(arrayToInsert)
-            const result = Student.create(arrayToInsert);
+    importFile('./data/' + req.file.filename)
+        .then(() => {
             res.status(200).json({
-                message: 'Student inserted successfully',
-                insertedStudent: result
-                
+                message: 'Student inserted successfully'
             });
-
-        }).catch(err => {
+        })
+        .catch(err => {
             res.status(500).json({
-                error: err.message
+                error: err.message + 'also new student added'
             });
         });
+});
+
+async function importFile(filePath) {
+    const arrayToInsert = [];
+    const source = await csvtojson().fromFile(filePath);
+    for (const record of source) {
+        const singleRow = {
+            roll_no: record["roll_no"].toUpperCase(),
+            name: record["name"],
+            year: record["year"],
+            linkedIn: record["linkedIn"],
+            parentId: record["parentId"].toUpperCase(),
+            picture: record["picture"]
+        };
+        arrayToInsert.push(singleRow);
     }
-    
-    // res.redirect('/')
-})
+    await Student.create(arrayToInsert);
+}
 
 // app.get('/', (req, res) => {
 //     app.use(express.static(path.join(__dirname, 'frontend','build')));
