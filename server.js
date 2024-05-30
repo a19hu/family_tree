@@ -35,7 +35,7 @@ app.use(cors(
     }
 ));
 app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "https://drive.google.com/open?id=1ZWCqsIll8RjAwJMMkD1cu4kOzpYBqW6","https://family-tree-yiq8.onrender.com"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Origin", "https://drive.google.com//thumbnail?id=1ZWCqsIll8RjAwJMMkD1cu4kOzpYBqW6R/","https://family-tree-yiq8.onrender.com"); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
