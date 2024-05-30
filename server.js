@@ -80,7 +80,7 @@ app.post('/uploadExcelFile', excelUploads.single("uploadfile"), (req, res) => {
         });
     }
     
-    res.redirect('/')
+    // res.redirect('/')
 })
 
 // app.get('/', (req, res) => {
