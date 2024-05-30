@@ -55,11 +55,11 @@ app.post('/uploadExcelFile', excelUploads.single("uploadfile"), (req, res) => {
         csvtojson().fromFile(filePath).then(source => {
             for (var i = 0; i < source.length; i++) {
                 var singleRow = {
-                    roll_no: source[i]["roll_no"],
+                    roll_no: source[i]["roll_no"].toUpperCase(),
                     name: source[i]["name"],
                     year: source[i]["year"],
                     linkedIn: source[i]["linkedIn"],
-                    parentId: source[i]["parentId"],
+                    parentId: source[i]["parentId"].toUpperCase(),
                     picture: source[i]["picture"],
 
                 };
